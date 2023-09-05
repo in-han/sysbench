@@ -191,14 +191,16 @@ function create_table(drv, con, table_num)
 
    query = string.format([[
 CREATE TABLE sbtest%d(
-  id BIGINT,
-  k BIGINT ,
-  c VARCHAR(120),
-  pad VARCHAR(60)
-)
+  id %s,
+  k INTEGER DEFAULT '0' NOT NULL,
+  c CHAR(120) DEFAULT '' NOT NULL,
+  pad CHAR(60) DEFAULT '' NOT NULL,
+  %s (id)
+) %s %s
    ]],
    -- table_num, id_def, id_index_def, engine_def,
-   table_num)
+   table_num, id_def, id_index_def, engine_def,
+   sysbench.opt.create_table_options)
 
    con:query(query)
 
@@ -250,13 +252,13 @@ end
 local t = sysbench.sql.type
 local stmt_defs = {
    point_selects = {
-      "SELECT c FROM sbtest%u WHERE id=? limit 200",
+      "SELECT c FROM sbtest%u WHERE id=?",
       t.INT},
    simple_ranges = {
-      "SELECT c FROM sbtest%u WHERE id >= ? AND id <= ? limit 200",
+      "SELECT c FROM sbtest%u WHERE id >= ? AND i <= ?",
       t.INT, t.INT},
    sum_ranges = {
-      "SELECT SUM(k) FROM sbtest%u WHERE id >= ? AND id <= ? limit 200",
+      "SELECT SUM(k) FROM sbtest%u WHERE id >= ? AND id <= ?",
        t.INT, t.INT},
    order_ranges = {
       "SELECT c FROM sbtest%u WHERE id BETWEEN ? AND ? ORDER BY c",
