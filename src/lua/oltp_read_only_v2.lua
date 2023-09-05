@@ -45,6 +45,8 @@ function event()
    execute_point_selects()
 
    if sysbench.opt.range_selects then
+      -- Sleep(20)
+
       execute_simple_ranges()
       -- execute_sum_ranges()
       -- execute_order_ranges()

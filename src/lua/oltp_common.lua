@@ -250,13 +250,13 @@ end
 local t = sysbench.sql.type
 local stmt_defs = {
    point_selects = {
-      "SELECT c FROM sbtest%u WHERE id=? limit 200",
+      "SELECT c FROM sbtest%u WHERE id=? limit 2",
       t.INT},
    simple_ranges = {
-      "SELECT c FROM sbtest%u WHERE id >= ? AND id <= ? limit 200",
+      "SELECT c FROM sbtest%u WHERE id >= ? AND id <= ? limit 2",
       t.INT, t.INT},
    sum_ranges = {
-      "SELECT SUM(k) FROM sbtest%u WHERE id >= ? AND id <= ? limit 200",
+      "SELECT SUM(k) FROM sbtest%u WHERE id >= ? AND id <= ? limit 2",
        t.INT, t.INT},
    order_ranges = {
       "SELECT c FROM sbtest%u WHERE id BETWEEN ? AND ? ORDER BY c",
@@ -519,3 +519,9 @@ function check_reconnect()
       end
    end
 end
+
+--- help functions ---
+function Sleep(n)
+   os.execute("sleep " .. n)
+end
+
