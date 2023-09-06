@@ -3,6 +3,7 @@
 
 SYSBENCH=./src/sysbench
 SYSBENCH=sysbench
+SYSBENCH=src/sysbench.debug_test_1
 
 sysbench ./src/lua/oltp_read_only_v2.lua help
 
